@@ -19,6 +19,13 @@ module Htmltoword
         word_file.save
       end
 
+      def create_with_remote_template content, file_name, template_url, xslt = nil
+        file_name += extension unless file_name =~ /\.docx$/
+        word_file = new(template_url, file_name)
+        word_file.replace_file content, doc_xml_file, xslt
+        word_file.save
+      end
+
       def extension
         '.docx'
       end
@@ -68,10 +75,10 @@ module Htmltoword
       end
     end
 
-    def replace_file html, file_name=Document.doc_xml_file
+    def replace_file html, file_name=Document.doc_xml_file, xslt = nil
       html = html.presence || '<body></body>'
       source = Nokogiri::HTML(html.gsub(/>\s+</, "><"))
-      xslt = Nokogiri::XSLT( File.read(Document.default_xslt_template) )
+      xslt ||= Nokogiri::XSLT( File.read(Document.default_xslt_template) )
       source = xslt.transform( source ) unless (source/"/html").blank?
       @replaceable_files[file_name] = source.to_s
     end
