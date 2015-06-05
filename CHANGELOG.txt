@@ -1,5 +1,18 @@
 CHANGELOG
 
+Version 0.4.1
+* Include forgotten templates and xslt
+
+Version 0.4
+* Do not render output to file, but rather to a buffer.
+  This means that apps using the gem no longer needs write permissions on a filesystem.
+* Support of table borders using the extra xslt
+* Support of basic lists using the extra xslt
+* Use of blockquotes as a replacement for spacing usint the extra xslt
+* Add a command line interface
+* Fixes on default template metadata
+
+
 Version 0.2
 * Relocation of templates and xslt files
 * Enable gem configuration to set the location of default and custom word templates and xslt.
@@ -22,7 +35,7 @@ Version 0.1.7
 
 Version 0.1.6:
 * Add tables support for borders and headers
- 
+
 Version 0.1.5:
 * Bugfix: h5 & h6 also create w:p's so any wrapping divs dont need to.
 

@@ -9,18 +9,16 @@
                 xmlns:msxsl="urn:schemas-microsoft-com:xslt"
                 xmlns:ext="http://www.xmllab.net/wordml2html/ext"
                 xmlns:java="http://xml.apache.org/xalan/java"
-                xmlns:str="http://exslt.org/common"
+                xmlns:str="http://exslt.org/strings"
+                xmlns:func="http://exslt.org/functions"
                 xmlns:fn="http://www.w3.org/2005/xpath-functions"
                 version="1.0"
-                exclude-result-prefixes="java msxsl ext w o v WX aml w10">
-
-
-  <xsl:output method="xml" encoding="utf-8" omit-xml-declaration="no" indent="yes" />
+                exclude-result-prefixes="java msxsl ext w o v WX aml w10"
+                extension-element-prefixes="func">
+  <xsl:output method="xml" encoding="utf-8" omit-xml-declaration="yes" indent="yes" />
 
   <xsl:template match="/">
-    <w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:mo="http://schemas.microsoft.com/office/mac/office/2008/main" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mv="urn:schemas-microsoft-com:mac:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" mc:Ignorable="w14 wp14">
-      <xsl:apply-templates />
-    </w:document>
+    <xsl:apply-templates />
   </xsl:template>
 
   <xsl:template match="head" />
@@ -37,15 +35,7 @@
             span
               text
     </xsl:comment>
-    <w:body>
-      <xsl:apply-templates/>
-      <w:sectPr>
-        <w:pgSz w:w="11906" w:h="16838"/>
-        <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="708" w:footer="708" w:gutter="0"/>
-        <w:cols w:space="708"/>
-        <w:docGrid w:linePitch="360"/>
-      </w:sectPr>
-    </w:body>
+    <xsl:apply-templates/>
   </xsl:template>
 
   <xsl:template match="body/*[not(*)]">
@@ -214,14 +204,9 @@
     <w:tbl>
       <w:tblPr>
         <w:tblStyle w:val="TableGrid"/>
-        <w:tblW w:w="0" w:type="auto"/>
         <xsl:call-template name="tableborders"/>
         <w:tblLook w:val="0600" w:firstRow="0" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="1" w:noVBand="1"/>
       </w:tblPr>
-      <w:tblGrid>
-        <w:gridCol w:w="2310"/>
-        <w:gridCol w:w="2310"/>
-      </w:tblGrid>
       <xsl:apply-templates />
     </w:tbl>
   </xsl:template>
@@ -351,4 +336,5 @@
       </w:pPr>
     </xsl:if>
   </xsl:template>
+
 </xsl:stylesheet>
